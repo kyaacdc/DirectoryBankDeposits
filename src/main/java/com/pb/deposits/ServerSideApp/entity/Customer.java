@@ -1,7 +1,7 @@
-package com.pb.deposits.entity;
+package com.pb.deposits.ServerSideApp.entity;
 
-import com.pb.deposits.entity.validators.Email;
-import com.pb.deposits.entity.validators.Name;
+import com.pb.deposits.ServerSideApp.entity.validators.Email;
+import com.pb.deposits.ServerSideApp.entity.validators.Name;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

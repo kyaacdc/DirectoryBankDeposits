@@ -1,4 +1,4 @@
-package com.pb.deposits.entity.enums;
+package com.pb.deposits.ServerSideApp.entity.enums;
 
 public enum TypeDeposit {
     PosteRestante(1), Urgent(2), Rated(3), Cumulative(4), Savings(5), Metallic(6);

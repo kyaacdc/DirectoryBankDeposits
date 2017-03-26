@@ -1,4 +1,4 @@
-package com.pb.deposits.entity.validators;
+package com.pb.deposits.ServerSideApp.entity.validators;
 
 
 import javax.validation.Constraint;

@@ -1,8 +1,8 @@
-package com.pb.deposits.entity;
+package com.pb.deposits.ServerSideApp.entity;
 
-import com.pb.deposits.entity.enums.TypeDeposit;
-import com.pb.deposits.entity.validators.Name;
-import com.pb.deposits.entity.validators.Number;
+import com.pb.deposits.ServerSideApp.entity.enums.TypeDeposit;
+import com.pb.deposits.ServerSideApp.entity.validators.Name;
+import com.pb.deposits.ServerSideApp.entity.validators.Number;
 
 import javax.persistence.*;
 

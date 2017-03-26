@@ -1,11 +1,11 @@
-package com.pb.deposits.entity.validators;
+package com.pb.deposits.ServerSideApp.entity.validators;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = com.pb.deposits.entity.validators.NumberConstraintValidator.class)
+@Constraint(validatedBy = com.pb.deposits.ServerSideApp.entity.validators.NumberConstraintValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Number {

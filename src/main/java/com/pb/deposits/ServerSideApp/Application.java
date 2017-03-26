@@ -1,4 +1,4 @@
-package com.pb.deposits;
+package com.pb.deposits.ServerSideApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
