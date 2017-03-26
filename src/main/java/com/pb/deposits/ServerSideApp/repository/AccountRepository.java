@@ -12,7 +12,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "account", path = "account")
 public interface AccountRepository extends PagingAndSortingRepository<Account, String> {
 
-    //Get Sum all deposits
+    //Get Sum all customers deposits
     @Query(value = "SELECT SUM(amount) FROM account", nativeQuery = true)
     Long getSumAllAccounts();
 

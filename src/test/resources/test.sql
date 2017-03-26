@@ -1,0 +1,1 @@
+SELECT * FROM account a INNER JOIN depositor d ON d.email = a.depositor WHERE d.email = 'anniya@bk.ru';
