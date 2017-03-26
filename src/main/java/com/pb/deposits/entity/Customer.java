@@ -1,30 +1,35 @@
 package com.pb.deposits.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import com.pb.deposits.entity.validators.Email;
+import com.pb.deposits.entity.validators.Name;
+
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Email
+    private String email;
+
+    @Name
     private String name;
 
     public Customer() {
     }
 
-    public Customer(int id, String name) {
-        this.id = id;
+    public Customer(String email, String name) {
+        this.email = email;
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {

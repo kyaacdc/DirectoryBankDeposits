@@ -1,15 +1,23 @@
 package com.pb.deposits.entity;
 
+import com.pb.deposits.entity.validators.Name;
+import com.pb.deposits.entity.validators.Number;
+
 import javax.persistence.*;
 
 @Entity
 public class Account {
 
     @Id
+    @Number
     private String accountNumber;
 
+    @Name
     private String bankName;
+
+    @Name
     private String country;
+
     private int amount;
     private int profitability;
     private int timeConstraints;
