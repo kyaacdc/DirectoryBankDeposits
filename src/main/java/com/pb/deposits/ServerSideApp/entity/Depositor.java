@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Customer {
+public class Depositor {
 
     @Id
     @Email
@@ -16,10 +16,10 @@ public class Customer {
     @Name
     private String name;
 
-    public Customer() {
+    public Depositor() {
     }
 
-    public Customer(String email, String name) {
+    public Depositor(String email, String name) {
         this.email = email;
         this.name = name;
     }

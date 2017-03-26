@@ -11,7 +11,7 @@ public class Account {
 
     @Id
     @Number
-    private String accountNumber;
+    private String id;
 
     @Name
     private String bankName;
@@ -26,28 +26,29 @@ public class Account {
     private TypeDeposit typeDeposit;
 
     @ManyToOne
-    @JoinColumn(name = "customer", nullable = false)
-    private Customer customer;
+    @JoinColumn(name = "depositor", nullable = false)
+    private Depositor depositor;
 
     public Account() {}
 
-    public Account(String accountNumber, String bankName, String country, int amount, int profitability, int timeConstraints, TypeDeposit typeDeposit, Customer customer) {
-        this.accountNumber = accountNumber;
+    public Account(String id, String bankName, String country, int amount, int profitability,
+                   int timeConstraints, TypeDeposit typeDeposit, Depositor depositor) {
+        this.id = id;
         this.bankName = bankName;
         this.country = country;
         this.amount = amount;
         this.profitability = profitability;
         this.timeConstraints = timeConstraints;
         this.typeDeposit = typeDeposit;
-        this.customer = customer;
+        this.depositor = depositor;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getId() {
+        return id;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getBankName() {
@@ -98,11 +99,11 @@ public class Account {
         this.typeDeposit = typeDeposit;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Depositor getDepositor() {
+        return depositor;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setDepositor(Depositor depositor) {
+        this.depositor = depositor;
     }
 }
