@@ -6,21 +6,48 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-public class ApacheHttpGet {
+public class AccountGetter implements Command{
 
-    public static void main(String[] args) {
+    private String id = "";
+    private String request = "";
+    private String criteria = "";
 
+    public AccountGetter() {
+    }
+
+    public AccountGetter(String id) {
+        this.id = id;
+    }
+
+    public AccountGetter(String id, String request) {
+        this.id = id;
+        this.request = request;
+    }
+
+    public AccountGetter(String id, String request, String criteria) {
+        this.id = id;
+        this.request = request;
+        this.criteria = criteria;
+    }
+
+    @Override
+    public void execute() {
 
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+
+            HttpGet getRequest;
             // specify the host, protocol, and port
             HttpHost target = new HttpHost("localhost", 8080, "http");
 
-            // specify the get request
-            HttpGet getRequest = new HttpGet("/account/search/findByTypeDeposit?typeDeposit=Rated");
+            if(id.equals("") && request.equals("") && criteria.equals(""))
+                getRequest = new HttpGet("/account");
+            else if (id.equals("") && !request.equals("") && criteria.equals(""))
+                getRequest = new HttpGet(request);
+            else
+                getRequest = new HttpGet("/account/search/findByTypeDeposit?typeDeposit=Rated");
 
             System.out.println("executing request to " + target);
 

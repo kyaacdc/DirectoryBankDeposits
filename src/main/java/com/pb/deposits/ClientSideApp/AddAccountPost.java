@@ -9,7 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class ApacheHttpClientPost {
+public class AddAccountPost {
 
     public static void main(String[] args){
 
