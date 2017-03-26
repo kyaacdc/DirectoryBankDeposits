@@ -1,5 +1,6 @@
 package com.pb.deposits.entity;
 
+import com.pb.deposits.entity.enums.TypeDeposit;
 import com.pb.deposits.entity.validators.Name;
 import com.pb.deposits.entity.validators.Number;
 
@@ -21,7 +22,8 @@ public class Account {
     private int amount;
     private int profitability;
     private int timeConstraints;
-    private int typeDeposit;
+
+    private TypeDeposit typeDeposit;
 
     @ManyToOne
     @JoinColumn(name = "customer", nullable = false)
@@ -29,7 +31,7 @@ public class Account {
 
     public Account() {}
 
-    public Account(String accountNumber, String bankName, String country, int amount, int profitability, int timeConstraints, int typeDeposit, Customer customer) {
+    public Account(String accountNumber, String bankName, String country, int amount, int profitability, int timeConstraints, TypeDeposit typeDeposit, Customer customer) {
         this.accountNumber = accountNumber;
         this.bankName = bankName;
         this.country = country;
@@ -88,11 +90,11 @@ public class Account {
         this.timeConstraints = timeConstraints;
     }
 
-    public int getTypeDeposit() {
+    public TypeDeposit getTypeDeposit() {
         return typeDeposit;
     }
 
-    public void setTypeDeposit(int typeDeposit) {
+    public void setTypeDeposit(TypeDeposit typeDeposit) {
         this.typeDeposit = typeDeposit;
     }
 
