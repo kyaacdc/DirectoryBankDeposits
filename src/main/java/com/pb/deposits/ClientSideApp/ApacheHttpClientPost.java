@@ -3,20 +3,18 @@ package com.pb.deposits.ClientSideApp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 public class ApacheHttpClientPost {
 
-    // http://localhost:8080/RESTfulExample/json/product/post
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
-        try {
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()){
 
-            DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost postRequest = new HttpPost(
                     "http://localhost:8080/account");
 
@@ -41,17 +39,8 @@ public class ApacheHttpClientPost {
 
                 System.out.println(output);
             }
-
-            httpClient.getConnectionManager().shutdown();
-
-
-        } catch (MalformedURLException e) {
-
-            e.printStackTrace();
         } catch (IOException e) {
-
             e.printStackTrace();
-
         }
 
     }
