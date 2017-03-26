@@ -1,6 +1,5 @@
 package com.pb.deposits.ClientSideApp;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,10 +18,10 @@ public class ApacheHttpClientPost {
 
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost postRequest = new HttpPost(
-                    "http://localhost:8080/RESTfulExample/json/product/post");
+                    "http://localhost:8080/account");
 
             StringEntity input = new StringEntity(
-                    "{\"qty\":100,\"name\":\"iPad 4\"}");
+                    "{\"id\":\"01234-567888\",\"amount\":\"10000\",\"bankName\":\"Credo\",\"country\":\"Poland\",\"profitability\":\"25\",\"timeConstraints\":\"365\",\"typeDeposit\":\"Cumulative\",\"depositor\":\"http://localhost:8080/Depositor/kya@bk.ru\"}");
             input.setContentType("application/json");
             postRequest.setEntity(input);
 
@@ -44,6 +43,7 @@ public class ApacheHttpClientPost {
             }
 
             httpClient.getConnectionManager().shutdown();
+
 
         } catch (MalformedURLException e) {
 
