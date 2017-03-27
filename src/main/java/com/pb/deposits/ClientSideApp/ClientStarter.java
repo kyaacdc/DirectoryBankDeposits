@@ -1,17 +1,11 @@
 package com.pb.deposits.ClientSideApp;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class ClientStarter {
 
-
-
     public static void main(String[] args) {
+
         System.out.println("Welcome into Bank Deposits Directory");
 
         Command command;
@@ -28,6 +22,11 @@ public class ClientStarter {
 
             if(commLine.equals("/h"))
                 client.printCommands();
+            else if(split[0].equals("addcustomer") && split.length == 3) {
+                command = new DepositorSaver(split[1], split[2]);
+                System.out.print("Add customer - ");
+                command.execute();
+            }
             else if(split[0].equals("add") && split.length == 9) {
                 command = new AccountSaver(split[1], Integer.parseInt(split[2]), split[3], split[4],
                         Integer.parseInt(split[5]), Integer.parseInt(split[6]), split[7], split[8]);
@@ -62,8 +61,8 @@ public class ClientStarter {
                 command.execute();
             }else {
                 System.out.println("Input correct command");
-                    client.printHelp();
             }
+            client.printHelp();
         }
         System.out.println("Good Bye!");
     }
@@ -77,8 +76,8 @@ public class ClientStarter {
         System.out.println("INFO DEPOSITOR <depositor_email> - list of deposits by customer. Example - info depositor kya@bk.ru");
         System.out.println("SHOW TYPE <type> - list all deposits by type. Type: PosteRestante, Urgent, Rated, Cumulative, Savings, Metallic");
         System.out.println("SHOW BANK <name> - for show list of all deposits by bank name. Example - show bank privat");
-        System.out.println("ADDCUSTOMER <customer info> - for add new customer. Example - addCustomer <email><name>");
-        System.out.println("ADD <deposit info> - for add new deposit. Example - add <id><amount><bank_name><country><profitabitity><timeConstraints><typrDeposit><DepositorsEmail>");
+        System.out.println("ADDCUSTOMER <customer info> - for add new customer. Example - addCustomer <email> <name>");
+        System.out.println("ADD <deposit info> - for add new deposit. Example - add <id> <amount> <bank_name> <country> <profitabitity> <timeConstraints> <typeDeposit> <DepositorsEmail>");
         System.out.println("DELETE <account id> - for remove deposit by ID");
     }
 

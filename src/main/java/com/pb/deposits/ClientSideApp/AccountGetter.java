@@ -45,8 +45,8 @@ public class AccountGetter implements Command{
             System.out.println("----------------------------------------");
             System.out.println(httpResponse.getStatusLine());
             Header[] headers = httpResponse.getAllHeaders();
-            for (int i = 0; i < headers.length; i++) {
-                System.out.println(headers[i]);
+            for (Header header : headers) {
+                System.out.println(header);
             }
             System.out.println("----------------------------------------");
 

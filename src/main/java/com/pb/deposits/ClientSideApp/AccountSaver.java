@@ -47,6 +47,10 @@ public class AccountSaver implements Command{
             System.err.println("ERROR TimeConstraints of deposit should be > 0. ");
         } else {
 
+            if(isDepositorExist(depositor)){
+
+            }
+
             try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
                 HttpPost postRequest = new HttpPost(
@@ -59,7 +63,7 @@ public class AccountSaver implements Command{
                                 + "\",\"profitability\":\"" + profitability
                                 + "\",\"timeConstraints\":\"" + timeConstraints
                                 + "\",\"typeDeposit\":\"" + typeDeposit
-                                + "\",\"depositor\":\"" + depositor
+                                + "\",\"depositor\":\"http://localhost:8080/depositor/" + depositor
                                 + "\"}");
 
                 input.setContentType("application/json");
@@ -68,8 +72,12 @@ public class AccountSaver implements Command{
                 HttpResponse response = httpClient.execute(postRequest);
 
                 if (response.getStatusLine().getStatusCode() != 201) {
-                    throw new RuntimeException("Failed : HTTP error code : "
-                            + response.getStatusLine().getStatusCode());
+                    System.err.println(response.getStatusLine().getStatusCode());
+                    System.err.println("Input ERROR.");
+                    System.err.println("Id should consist of digits 0-9 and -,(,) symbols");
+                    System.err.println("Name of country should consist of letters A-Z, a-z symbols");
+                    System.err.println("Email of depositor should consist of letters A-Z, a-z, digits 0-9 and symbols -@,(,)");
+                    return;
                 }
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -81,7 +89,8 @@ public class AccountSaver implements Command{
 
                     System.out.println(output);
                 }
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -90,6 +99,20 @@ public class AccountSaver implements Command{
     private boolean isAccountExist(String id){
         try (CloseableHttpClient httpClient = HttpClients.createDefault()){
             HttpGet request = new HttpGet("http://localhost:8080/account/" + id);
+
+            HttpResponse response = httpClient.execute(request);
+
+            return response.getStatusLine().getStatusCode() != 404;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    private boolean isDepositorExist(String depositor){
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()){
+            HttpGet request = new HttpGet("http://localhost:8080/depositor/" + depositor);
 
             HttpResponse response = httpClient.execute(request);
 
