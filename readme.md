@@ -4,9 +4,9 @@ Email: kya@bk.ru
 Skype: kyaacdc
 Phone: +38 (050) 333-71-78
 
-Run ServerStarter for start REST SpringBoot server. And run ClientStarter for start Apache Http CLI REST client (JSON format)
-Or run JUnit Mockito tests.
-
+Run ServerStarter for start RESTful SpringBoot server app. And run ClientStarter for start Apache Http CLI REST client (JSON)
+Also you can run JUnit Mockito tests. You will can to do import this Gradle project with using build.gradle file.
+Manual for use CLI aplication (or web-browser)
 1) For list all deposits input in command line - LIST (case ignored)    or input in internet browser this reference - http://localhost:8080/account
 2) For see summ of all deposits in bank input - SUM    or (http://localhost:8080/account/search/getSumAllAccounts)
 3) For see count deposits in bank - COUNT    or (http://localhost:8080/account/search/countBy)
@@ -17,3 +17,4 @@ Or run JUnit Mockito tests.
 8) For add new deposit () info -  ADD <deposit info ... > (ADD <id> <amount> <bank_name> <country> <profitabitity> <timeConstraints> <typeDeposit> <DepositorsEmail>");)
 9) For add new customer -  ADDCUSTOMER  <email> <name>
 10) For remove deposit - DELETE <account_id>
+11) Input /h for help or /q for quit from CLI app.
