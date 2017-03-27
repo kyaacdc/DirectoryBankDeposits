@@ -39,86 +39,83 @@ public class DepositorRepositoryTest {
     public void shouldReturnRepositoryIndex() throws Exception {
 
         mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk()).andExpect(
-                jsonPath("$._links.customer").exists());
+                jsonPath("$._links.depositor").exists());
     }
 
     @Test
     public void shouldCreateEntity() throws Exception {
 
-        mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\", \"phone\":\"0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\"}")).andExpect(
                 status().isCreated()).andExpect(
-                header().string("Location", containsString("customer/")));
+                header().string("Location", containsString("depositor/")));
     }
 
     @Test(expected = NestedServletException.class)
     public void shouldThrowExceptionWhenAddIncorrectPhoneInCreateEntityTime() throws Exception {
 
-        mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\", \"phone\":\"%$f0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Yu8riy\"}")).andExpect(
                 status().isCreated()).andExpect(
-                header().string("Location", containsString("customer/")));
+                header().string("Location", containsString("depositor/")));
     }
 
     @Test(expected = NestedServletException.class)
     public void shouldThrowExceptionWhenAddIncorrectNameOfCustomer() throws Exception {
 
-        mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yur8iy\", \"phone\":\"0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya%$#@bk.ru\", \"name\":\"Yuriy\"}")).andExpect(
                 status().isCreated()).andReturn();
     }
 
     @Test
     public void shouldRetrieveEntity() throws Exception {
 
-        MvcResult mvcResult = mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\", \"phone\":\"0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        MvcResult mvcResult = mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\"}")).andExpect(
                 status().isCreated()).andReturn();
 
         String location = mvcResult.getResponse().getHeader("Location");
         mockMvc.perform(get(location)).andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Yuriy"))
-                .andExpect(jsonPath("$.phone").value("0503337178"))
-                .andExpect(jsonPath("$.subscribe").value("true"));
+                .andExpect(jsonPath("$.name").value("Yuriy"));
     }
 
     @Test
     public void shouldQueryEntity() throws Exception {
 
-        mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\", \"phone\":\"0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\"}")).andExpect(
                 status().isCreated());
 
         mockMvc.perform(
-                get("/customer/search/findByName?name={name}", "Yuriy")).andExpect(
+                get("/depositor/search/findByName?name={name}", "Yuriy")).andExpect(
                 status().isOk()).andExpect(
-                jsonPath("$._embedded.customer[0].name").value(        //jsonPath("$._embedded.customer[0].name").value(
+                jsonPath("$._embedded.depositor[0].name").value(        //jsonPath("$._embedded.depositor[0].name").value(
                         "Yuriy"));
     }
 
     @Test
     public void shouldUpdateEntity() throws Exception {
 
-        MvcResult mvcResult =  mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\", \"phone\":\"0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        MvcResult mvcResult =  mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\"}")).andExpect(
                 status().isCreated()).andReturn();
 
         String location = mvcResult.getResponse().getHeader("Location");
 
         mockMvc.perform(put(location).content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Kolya\", \"phone\":\"0677449650\", \"subscribe\":\"true\"}")).andExpect(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Kolya\", \"phone\":\"0677449650\"}")).andExpect(
                 status().isNoContent());
 
-        mockMvc.perform(get(location)).andExpect(status().isOk()).andExpect(
-                jsonPath("$.name").value("Kolya")).andExpect(
-                jsonPath("$.phone").value("0677449650"));
+        mockMvc.perform(get(location)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Kolya"));
     }
 
     @Test
     public void shouldPartiallyUpdateEntity() throws Exception {
 
-        MvcResult mvcResult =  mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\", \"phone\":\"0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        MvcResult mvcResult =  mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\"}")).andExpect(
                 status().isCreated()).andReturn();
 
         String location = mvcResult.getResponse().getHeader("Location");
@@ -128,15 +125,14 @@ public class DepositorRepositoryTest {
                 status().isNoContent());
 
         mockMvc.perform(get(location)).andExpect(status().isOk()).andExpect(
-                jsonPath("$.name").value("Nikolay")).andExpect(
-                jsonPath("$.phone").value("0503337178"));
+                jsonPath("$.name").value("Nikolay"));
     }
 
     @Test
     public void shouldDeleteEntity() throws Exception {
 
-        MvcResult mvcResult =  mockMvc.perform(post("/customer").content(
-                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\", \"phone\":\"0503337178\", \"subscribe\":\"true\"}")).andExpect(
+        MvcResult mvcResult =  mockMvc.perform(post("/depositor").content(
+                "{\"email\": \"kya@bk.ru\", \"name\":\"Yuriy\"}")).andExpect(
                 status().isCreated()).andReturn();
 
         String location = mvcResult.getResponse().getHeader("Location");

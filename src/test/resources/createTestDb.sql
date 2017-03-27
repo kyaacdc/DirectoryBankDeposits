@@ -1,3 +1,4 @@
+CREATE DATABASE banktestdb;
 CREATE TABLE depositor
 (
   email VARCHAR(255) PRIMARY KEY NOT NULL,
