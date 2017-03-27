@@ -9,9 +9,31 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class AddAccountPost {
+public class AccountSaver implements Command{
 
-    public static void main(String[] args){
+    private String id;
+    private String amount;
+    private String bankName;
+    private String country;
+    private String profitability;
+    private String timeConstraints;
+    private String typeDeposit;
+    private String depositor;
+
+    public AccountSaver(String id, String amount, String bankName, String country, String profitability,
+                        String timeConstraints, String typeDeposit, String depositor) {
+        this.id = id;
+        this.amount = amount;
+        this.bankName = bankName;
+        this.country = country;
+        this.profitability = profitability;
+        this.timeConstraints = timeConstraints;
+        this.typeDeposit = typeDeposit;
+        this.depositor = depositor;
+    }
+
+    @Override
+    public void execute() {
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault()){
 
@@ -19,7 +41,14 @@ public class AddAccountPost {
                     "http://localhost:8080/account");
 
             StringEntity input = new StringEntity(
-                    "{\"id\":\"01234-567888\",\"amount\":\"10000\",\"bankName\":\"Credo\",\"country\":\"Poland\",\"profitability\":\"25\",\"timeConstraints\":\"365\",\"typeDeposit\":\"Cumulative\",\"depositor\":\"http://localhost:8080/Depositor/kya@bk.ru\"}");
+                    "{\"id\":\"" + id + "\",\"amount\":\"" + amount
+                            + "\",\"bankName\":\"" + bankName
+                            + "\",\"country\":\"" + country
+                            + "\",\"profitability\":\"" + profitability
+                            + "\",\"timeConstraints\":\"" + timeConstraints
+                            + "\",\"typeDeposit\":\"" + typeDeposit
+                            + "\",\"depositor\":\"" + depositor
+                            + "\"}");
             input.setContentType("application/json");
             postRequest.setEntity(input);
 
@@ -44,5 +73,4 @@ public class AddAccountPost {
         }
 
     }
-
 }

@@ -10,25 +10,13 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 public class AccountGetter implements Command{
-
-    private String id = "";
     private String request = "";
     private String criteria = "";
 
     public AccountGetter() {
     }
 
-    public AccountGetter(String id) {
-        this.id = id;
-    }
-
-    public AccountGetter(String id, String request) {
-        this.id = id;
-        this.request = request;
-    }
-
-    public AccountGetter(String id, String request, String criteria) {
-        this.id = id;
+    public AccountGetter(String request, String criteria) {
         this.request = request;
         this.criteria = criteria;
     }
@@ -42,12 +30,12 @@ public class AccountGetter implements Command{
             // specify the host, protocol, and port
             HttpHost target = new HttpHost("localhost", 8080, "http");
 
-            if(id.equals("") && request.equals("") && criteria.equals(""))
+            if(request.equals("") && criteria.equals(""))
                 getRequest = new HttpGet("/account");
-            else if (id.equals("") && !request.equals("") && criteria.equals(""))
+            else if (!request.equals("") && criteria.equals(""))
                 getRequest = new HttpGet(request);
             else
-                getRequest = new HttpGet("/account/search/findByTypeDeposit?typeDeposit=Rated");
+                getRequest = new HttpGet(request + criteria);
 
             System.out.println("executing request to " + target);
 
