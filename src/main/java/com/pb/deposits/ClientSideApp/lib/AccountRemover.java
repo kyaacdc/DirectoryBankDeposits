@@ -1,18 +1,24 @@
-package com.pb.deposits.ClientSideApp;
+package com.pb.deposits.ClientSideApp.lib;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+
 import java.io.IOException;
 
-public class DeleteExample {
+public class AccountRemover implements Command{
 
-    public static void main(String[] args){
+    private String id;
 
+    public AccountRemover(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public void execute() {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()){
-            HttpDelete delRequest = new HttpDelete(
-                    "http://localhost:8080/account/01234-567888");
+            HttpDelete delRequest = new HttpDelete("http://localhost:8080/account/" + id);
 
             HttpResponse response = httpClient.execute(delRequest);
 

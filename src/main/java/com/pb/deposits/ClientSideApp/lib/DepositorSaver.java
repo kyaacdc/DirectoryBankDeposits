@@ -1,4 +1,4 @@
-package com.pb.deposits.ClientSideApp;
+package com.pb.deposits.ClientSideApp.lib;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;

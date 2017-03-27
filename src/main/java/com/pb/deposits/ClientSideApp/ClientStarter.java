@@ -1,5 +1,7 @@
 package com.pb.deposits.ClientSideApp;
 
+import com.pb.deposits.ClientSideApp.lib.*;
+
 import java.util.Scanner;
 
 public class ClientStarter {
@@ -22,6 +24,11 @@ public class ClientStarter {
 
             if(commLine.equals("/h"))
                 client.printCommands();
+            else if(split[0].equals("delete") && split.length == 2) {
+                command = new AccountRemover((split[1]));
+                System.out.print("Remove account - ");
+                command.execute();
+            }
             else if(split[0].equals("addcustomer") && split.length == 3) {
                 command = new DepositorSaver(split[1], split[2]);
                 System.out.print("Add customer - ");

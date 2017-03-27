@@ -1,4 +1,4 @@
-package com.pb.deposits.ClientSideApp;
+package com.pb.deposits.ClientSideApp.lib;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,9 +47,8 @@ public class AccountSaver implements Command{
             System.err.println("ERROR TimeConstraints of deposit should be > 0. ");
         } else {
 
-            if(isDepositorExist(depositor)){
-
-            }
+            if(!isDepositorExist(depositor))
+                createDepositor(depositor);
 
             try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
@@ -122,5 +121,10 @@ public class AccountSaver implements Command{
             e.printStackTrace();
         }
         return true;
+    }
+
+    private void createDepositor(String depositor){
+        Command command = new DepositorSaver(depositor, depositor.split("@")[0]);
+        command.execute();
     }
 }
