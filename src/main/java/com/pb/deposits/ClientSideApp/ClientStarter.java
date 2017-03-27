@@ -63,7 +63,7 @@ public class ClientStarter {
                 System.out.print("List deposits by type - ");
                 command.execute();
             }else if(split[0].equals("show") && split[1].equals("bank") && split.length == 3) {
-                command = new AccountGetter("/account/search/findByBankName", "?bankName=" + split[2]);
+                command = new AccountGetter("/account/search/findByBankNameIgnoreCase", "?bankName=" + split[2]);
                 System.out.print("List deposits by bank name - ");
                 command.execute();
             }else {

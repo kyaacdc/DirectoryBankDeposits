@@ -27,5 +27,5 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, S
     List<Account> findByTypeDeposit(@Param("typeDeposit") TypeDeposit typeDeposit);
 
     //Get List accounts by BankName
-    List<Account> findByBankName(@Param("bankName") String bankName);
+    List<Account> findByBankNameIgnoreCase(@Param("bankName") String bankName);
 }
