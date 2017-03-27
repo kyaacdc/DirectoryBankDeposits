@@ -1,5 +1,6 @@
-package com.pb.deposits.ClientSideApp.lib;
+package com.pb.deposits.ClientSideApp.services.impl;
 
+import com.pb.deposits.ClientSideApp.services.Command;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -9,7 +10,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-public class AccountGetter implements Command{
+public class AccountGetter implements Command {
     private String request = "";
     private String criteria = "";
 

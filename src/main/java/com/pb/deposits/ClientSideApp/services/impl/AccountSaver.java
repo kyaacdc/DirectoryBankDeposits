@@ -1,8 +1,10 @@
-package com.pb.deposits.ClientSideApp.lib;
+package com.pb.deposits.ClientSideApp.services.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import com.pb.deposits.ClientSideApp.services.Command;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -10,7 +12,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class AccountSaver implements Command{
+public class AccountSaver implements Command {
 
     private String id;
     private int amount;
@@ -39,7 +41,7 @@ public class AccountSaver implements Command{
         if(isAccountExist(id)){
             System.err.println("ERROR Deposit with this ID is exist");
         } else if (amount >= 100000){
-            System.err.println("ERROR This amount of deposit is not permit in our bank");
+            System.err.println("ERROR This amount of deposit is not permit in our bank. Should be <= 100000");
         } else if (profitability < 0 || profitability > 30){
             System.err.println("ERROR This profitability of deposit is not permit in our bank." +
                     " Percent of profitability should be from 0 to 30 percents");
@@ -76,6 +78,7 @@ public class AccountSaver implements Command{
                     System.err.println("Id should consist of digits 0-9 and -,(,) symbols");
                     System.err.println("Name of country should consist of letters A-Z, a-z symbols");
                     System.err.println("Email of depositor should consist of letters A-Z, a-z, digits 0-9 and symbols -@,(,)");
+                    System.err.println("Type of deposit should consist of digit 0-5, or next words - PosteRestante, Urgent, Rated, Cumulative, Savings, Metallic");
                     return;
                 }
 

@@ -1,5 +1,6 @@
-package com.pb.deposits.ClientSideApp.lib;
+package com.pb.deposits.ClientSideApp.services.impl;
 
+import com.pb.deposits.ClientSideApp.services.Command;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -7,7 +8,7 @@ import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
 
-public class AccountRemover implements Command{
+public class AccountRemover implements Command {
 
     private String id;
 

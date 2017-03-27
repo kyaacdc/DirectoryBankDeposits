@@ -1,4 +1,4 @@
-package com.pb.deposits.ClientSideApp.lib;
+package com.pb.deposits.ClientSideApp.services;
 
 public interface Command {
 

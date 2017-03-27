@@ -1,5 +1,6 @@
-package com.pb.deposits.ClientSideApp.lib;
+package com.pb.deposits.ClientSideApp.services.impl;
 
+import com.pb.deposits.ClientSideApp.services.Command;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
