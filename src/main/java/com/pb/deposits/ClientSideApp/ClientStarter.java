@@ -29,7 +29,8 @@ public class ClientStarter {
             if(commLine.equals("/h"))
                 client.printCommands();
             else if(split[0].equals("add") && split.length == 9) {
-                command = new AccountSaver(split[1], split[2], split[3], split[4], split[5], split[6], split[7], split[8]);
+                command = new AccountSaver(split[1], Integer.parseInt(split[2]), split[3], split[4],
+                        Integer.parseInt(split[5]), Integer.parseInt(split[6]), split[7], split[8]);
                 System.out.print("Add deposit - ");
                 command.execute();
             } else if(split[0].equals("list")) {

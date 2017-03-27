@@ -19,6 +19,8 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, S
     //Get Count all deposits
     Long countBy();
 
+    boolean exists(@Param("id") String id);
+
     //Get List accounts by Depositor
     @Query(value = "SELECT * FROM account a INNER JOIN depositor d ON d.email = a.depositor WHERE d.email = ?1", nativeQuery = true)
     List<Account> findByDepositor(@Param("depositor") String email);
